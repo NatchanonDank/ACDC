@@ -1,6 +1,6 @@
 ﻿@page
 @using FinalProject.Pages.ReadMail;
-@model Index1Model
+@model ReadEmail
 @{
 }
 
@@ -11,15 +11,15 @@
             <td style="width: 65.2461%; height: 50px; text-align: center;"><h1><strong>READING EMAIL</strong></h1></td>
         </tr>
         <tr style="height: 18px;">
-            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>From:</p></td>
+            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>From:@Model.Email.EmailSender</p>></td>
             <td style="width: 65.2461%; height: 18px;">&nbsp;</td>
         </tr>
         <tr style="height: 18px;">
-            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>Subject:</p></td>
+            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>Subject:@Model.Email.EmailSubject</p></td>
             <td style="width: 65.2461%; height: 18px;">&nbsp;</td>
         </tr>
         <tr style="height: 18px;">
-            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>Message:</p></td>
+            <td style="width: 1.42045%; height: 18px; text-align: right;"><p>Message:@Model.Email.EmailMessage</p></td>
             <td style="width: 65.2461%; height: 18px;">&nbsp;</td>
         </tr>
     </tbody>
