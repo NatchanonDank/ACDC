@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using static Humanizer.In;
 
 namespace FinalProject.Pages
 {
@@ -38,8 +39,9 @@ namespace FinalProject.Pages
                                     EmailSender = reader.GetString(5),
                                     EmailReceiver = reader.GetString(6)
                                 };
+                                OnPost();
                             }
-                          
+                         
 
                         }
                     }
@@ -49,7 +51,31 @@ namespace FinalProject.Pages
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+        public void OnPost()
+        {
+            string id = Request.Query["emailid"];
+            try
+            {
+                String connectionString = "Server=tcp:acdcproject.database.windows.net,1433;Initial Catalog=ACDC;Persist Security Info=False;User ID=acdc;Password=@Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
+                    String sql = "UPDATE emails SET emailisread=@read WHERE emailid=@emailid";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@emailid", id);
+                        command.Parameters.AddWithValue("@read", 1);
+                        command.ExecuteNonQuery();
+
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
         public class EmailInfo
         {
