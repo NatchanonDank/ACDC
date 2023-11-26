@@ -14,19 +14,19 @@ namespace FinalProject.Pages
         public EmailInfo Emails { get; set; }
         public void OnGet()
         {
-            string id = Request.Query["emailid"];
+            string id = Request.Query["emailid"];//เอา id มาเก็บค่า id ของ email ผ่าน Request.Query จาก Index
             try
             {
                 String connectionString = "Server=tcp:acdcproject.database.windows.net,1433;Initial Catalog=ACDC;Persist Security Info=False;User ID=acdc;Password=@Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))//ประกาศmethod ในการ connect กับ database
                 {
-                    connection.Open();
+                    connection.Open();//เรียกใช้ Method connection ในการเชื่อต่อ database
 
-                    String sql = "SELECT * FROM emails WHERE emailid=@emailid";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    String sql = "SELECT * FROM emails WHERE emailid=@emailid";//ประกาศตัว คำสั่งsql ให้เรียกข้อมูลจากdatabase โดยเอาข้อมูลของ emailid นั้นๆ
+                    using (SqlCommand command = new SqlCommand(sql, connection))//ประกาศ method SqlCommand เพื่อที่จะรัน CommandของSql
                     {
-                        command.Parameters.AddWithValue("@emailid", id);
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        command.Parameters.AddWithValue("@emailid", id);//ส่งค่า id เข้้าไปแทน @emailid ในตัวแปร sql เพื่อที่จะส่งไปเช็คว่าจะต้องดึงข้อมูลของ เมลไหน
+                        using (SqlDataReader reader = command.ExecuteReader())//ประกาศเรียกใช้Method Read ข้อมูลจากDatabaseที่เราอ่านได้
                         {
                             if(reader.Read()) {
                                 Emails = new EmailInfo
@@ -38,8 +38,8 @@ namespace FinalProject.Pages
                                     EmailIsRead = reader.GetString(4),
                                     EmailSender = reader.GetString(5),
                                     EmailReceiver = reader.GetString(6)
-                                };
-                                OnPost();
+                                };//ตรงนี้เป็นการนำข้อมูลจากในDatabaseมาเก็บไว้ในตัวแปรต่างๆผ่านMethod .Get ต่างๆ
+                                OnPost();//เรียกใช้ Function OnPost เพื่อเป็นการUPDATE Database ในส่วนของ emailsread
                             }
                          
 
@@ -52,22 +52,22 @@ namespace FinalProject.Pages
                 Console.WriteLine(ex.ToString());
             }
         }
-        public void OnPost()
+        public void OnPost()//ประกาศเป็นฟังก์ชั่น เพื่อที่จะเอาไปเรียกใช้ใน Onget()
         {
-            string id = Request.Query["emailid"];
+            string id = Request.Query["emailid"];//เอา id มาเก็บค่า id ของ email ผ่าน Request.Query จาก Index
             try
             {
                 String connectionString = "Server=tcp:acdcproject.database.windows.net,1433;Initial Catalog=ACDC;Persist Security Info=False;User ID=acdc;Password=@Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))//ประกาศmethod ในการ connect กับ database
                 {
-                    connection.Open();
+                    connection.Open();//เรียกใช้ Method connection ในการเชื่อต่อ database
 
-                    String sql = "UPDATE emails SET emailisread=@read WHERE emailid=@emailid";
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    String sql = "UPDATE emails SET emailisread=@read WHERE emailid=@emailid";//ประกาศตัว คำสั่งsql ให้อัพเดตหรือเปลี่ยนแปลงข้อในColum emailisread โดยผ่านemailsidของ emailที่จะ อัพเดต
+                    using (SqlCommand command = new SqlCommand(sql, connection))//ประกาศ method SqlCommand เพื่อที่จะรัน CommandของSql
                     {
-                        command.Parameters.AddWithValue("@emailid", id);
-                        command.Parameters.AddWithValue("@read", 1);
-                        command.ExecuteNonQuery();
+                        command.Parameters.AddWithValue("@emailid", id);//เอา id เข้าไปแทน @emailid ในคำสั่งของSql
+                        command.Parameters.AddWithValue("@read", 1);//เอาค่า 1 เข้าไปแทน @read ในคำสั่้งของ Sql
+                        command.ExecuteNonQuery();//เป็นการรันCommand ของ Sql ทั้งหมด เพื่อที่จะอัพเดต
 
                     }
                 };
