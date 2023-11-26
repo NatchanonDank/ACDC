@@ -1,0 +1,27 @@
+﻿@page
+@model FinalProject.Pages.ReadMail.IndexModel
+@using Microsoft.Data.SqlClient;
+@{
+    try
+    {
+        String emailid = Request.Query["emailid"];
+
+        String connectionString = "Server=tcp:acdcproject.database.windows.net,1433;Initial Catalog=ACDC;Persist Security Info=False;User ID=acdc;Password=@Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "DELETE FROM emails WHERE emailid=@emailid";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@emailid", emailid);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+
+    }
+    Response.Redirect("/Index");
+}
