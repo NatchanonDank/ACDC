@@ -10,7 +10,7 @@ namespace FinalProject.Pages
     public class ReadEmail : PageModel
 
     {
-        public EmailInfo Email { get; set; }
+        public EmailInfo Emails { get; set; }
         public void OnGet()
         {
             string id = Request.Query["emailid"];
@@ -28,7 +28,7 @@ namespace FinalProject.Pages
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if(reader.Read()) {
-                                Email = new EmailInfo
+                                Emails = new EmailInfo
                                 {
                                     EmailID = reader.GetInt32(0).ToString(),
                                     EmailSubject = reader.GetString(1),
