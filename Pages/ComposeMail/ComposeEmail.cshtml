@@ -1,28 +1,28 @@
 ﻿@page
-@model FinalProject.Pages.ComposeMail.IndexModel
+@model FinalProject.Pages.ComposeMail.ComposeEmailModel
 @{
 }
 
 <br />
 <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SENDING EMAIL</h2>
 
-<form method="post">
+<form  method="post">
     <div class="row mb-3">
         <label class="col-sm-1 col-form-label">To</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" >
+            <input type="text" class="form-control" name="receiver">
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-1 col-form-label">Subject</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" >
+            <input type="text" class="form-control" name="subject">
         </div>
     </div>
     <div class="row mb-5">
         <label class="col-sm-1 col-form-label">Message</label>
         <div class="col-sm-6">
-            <input style="height: 400px" type="text" class="form-control" >
+            <input style="height: 400px" type="text" class="form-control" name="message" >
         </div>
     </div>
 
