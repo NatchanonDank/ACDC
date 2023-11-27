@@ -118,7 +118,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    return RedirectToPage("./LoginFail");
                 }
             }
 
