@@ -5,32 +5,41 @@
 }
 
 <center><img src="images/logo.jpg" width="400" /></center>
-
 <table class="table">
     <thread>
         <tr>
             <th>From</th>
             <th>Subject</th>
-            <th style="text-align: right;">Date/Time
+            <th style="text-align: right;">
+                Date/Time
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </th>
         </tr>
     </thread>
-
-    <tbody>
-        @foreach (var item in Model.listEmails)
-        {
-            <tr>
-                <td>@item.EmailSender</td>
-                <td>
-                    @if (item.EmailIsRead.Equals("0")) {
-                        <img src="images/yellow.gif" height="10pt"> 
-                    }
-                    <a href="/ReadMail/ReadEmail?emailid=@item.EmailID">@item.EmailSubject</a>
-                </td>
-                <td style="text-align: right;">@item.EmailDate</td>
-            </tr>
-        }
-    </tbody>
 </table>
+
+@foreach (var item in Model.listEmails)
+{
+    <a href="/ReadMail/ReadEmail?emailid=@item.EmailID">
+        <article class="card" style="background-color:maroon">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td width="200">@item.EmailSender</td>
+                        <td>
+                            @if (item.EmailIsRead.Equals("0"))
+                            {
+                                <img src="images/yellow.gif" height="10">
+                            }
+                            @item.EmailSubject
+                        </td>
+                        <td style="text-align: right;">@item.EmailDate</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </a>
+}
+<p>&nbsp;</p>
 <a class="btn btn-primary btn-sm" href="/ComposeMail/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
