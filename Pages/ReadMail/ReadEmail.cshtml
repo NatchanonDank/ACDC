@@ -5,7 +5,9 @@
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form><fieldset> 
-        <legend><h2>READING EMAIL&nbsp;&nbsp; <a href="/ReadMail/DeleteEmail?emailid=@Model.Emails.EmailID" class="btn btn-primary btn-sm" style="color:white"> <i class="fa fa-trash"></i> DELETE</a> </h2></legend>
+        <legend><h2>READING EMAIL&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/ReadMail/DeleteEmail?emailid=@Model.Emails.EmailID" class="btn btn-primary btn-sm" style="color:white"> 
+                <i class="fa fa-trash"></i> DELETE</a> </h2></legend>
         <p>From:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.Emails.EmailSender</p>
         <p>Subject:&nbsp;&nbsp;&nbsp;&nbsp;@Model.Emails.EmailSubject</p>
         <p>Message:&nbsp;&nbsp;@Model.Emails.EmailMessage</p>
