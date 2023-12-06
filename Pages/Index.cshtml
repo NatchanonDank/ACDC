@@ -18,27 +18,37 @@
         </tr>
     </thread>
 </table>
-@foreach (var item in Model.listEmails)
+@if (@User.Identity.Name == null)
 {
-    <a href="/ReadMail/ReadEmail?emailid=@item.EmailID">
-        <article class="card" style="background-color:maroon">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td width="230">@item.EmailSender</td>
-                        <td>
-                            @if (item.EmailIsRead.Equals("0"))
-                            {
-                                <img src="images/yellow.gif" height="10">
-                            }
-                            @item.EmailSubject
-                        </td>
-                        <td style="text-align: right;" >@item.EmailDate</td>
-                    </tr>
-                </tbody>
-            </table>
-        </article>
-    </a>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>"Please Loging First"</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
+else
+{
+    @foreach (var item in Model.listEmails)
+    {
+        <a href="/ReadMail/ReadEmail?emailid=@item.EmailID">
+            <article class="card" style="background-color:maroon">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td width="230">@item.EmailSender</td>
+                            <td>
+                                @if (item.EmailIsRead.Equals("0"))
+                                {
+                                    <img src="images/yellow.gif" height="10">
+                                }
+                                @item.EmailSubject
+                            </td>
+                            <td style="text-align: right;">@item.EmailDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </a>
+    }
     <a class="btn btn-primary btn-sm" href="/ComposeMail/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
 }
+<p>&nbsp;</p>
