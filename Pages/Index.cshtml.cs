@@ -8,7 +8,7 @@ namespace FinalProject.Pages
 {
     public class IndexModel : PageModel
     {
-
+        string ErrorMesssage = "";
         public List<EmailInfo> listEmails = new List<EmailInfo>();
 
         private readonly ILogger<IndexModel> _logger;
@@ -20,6 +20,7 @@ namespace FinalProject.Pages
 
         public void OnGet()
         {
+
             try
             {
                 String connectionString = "Server=tcp:acdcproject.database.windows.net,1433;Initial Catalog=ACDC;Persist Security Info=False;User ID=acdc;Password=@Admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
@@ -30,7 +31,7 @@ namespace FinalProject.Pages
                     string username = "";
                     if (User.Identity.Name == null)
                     {
-                        username = "";
+                        ErrorMesssage = "You Need to Login First"; 
                     } else
                     {
                         username = User.Identity.Name;

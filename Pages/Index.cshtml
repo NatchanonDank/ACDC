@@ -18,7 +18,6 @@
         </tr>
     </thread>
 </table>
-
 @foreach (var item in Model.listEmails)
 {
     <a href="/ReadMail/ReadEmail?emailid=@item.EmailID">
@@ -42,4 +41,14 @@
     </a>
 }
 <p>&nbsp;</p>
-<a class="btn btn-primary btn-sm" href="/ComposeMail/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
+@if (@User.Identity.Name == null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>"Please Loging First"</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+else
+{
+    <a class="btn btn-primary btn-sm" href="/ComposeMail/ComposeEmail?Sender=@User.Identity.Name">Compose New Email</a>
+}
