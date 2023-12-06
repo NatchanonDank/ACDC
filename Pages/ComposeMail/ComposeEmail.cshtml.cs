@@ -55,8 +55,9 @@ namespace FinalProject.Pages.ComposeMail
                             insertCommand.Parameters.AddWithValue("@receiver", email.EmailReceiver);
                             insertCommand.ExecuteNonQuery();
                         }
-
+                        
                         SuccessMessage = "Email sent successfully!";
+                        Response.Redirect("/ComposeMail/ComposeSuccess");
                     }
                     else
                     {
